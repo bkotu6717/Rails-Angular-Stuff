@@ -1,0 +1,43 @@
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 ng-if="edituser" class="modal-title">Edit user</h4>
+          <h4 ng-if="createuser" class="modal-title">Create user</h4>
+        </div>
+        <div class="modal-body">
+           <form name="userform" novalidate>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="name" name="name" class="form-control" ng-model="user.name" id="name" placeholder="Enter name" required>
+              <span class="error_message" ng-show="userform.name.$touched && userform.name.$error.required">Name is required.</span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>{{userform.$error.isDuplicatedEmail}}
+              <input type="email" name="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email" required
+              ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" check-email>
+              <span class="error_message" ng-show="userform.email.$touched && userform.email.$error.required">Email is required.</span>
+               <span class="error_message" ng-show="userform.email.$touched && userform.email.$error.pattern">Email is invalid.</span>
+
+            </div>
+             <div class="form-group">
+              <label for="dob">DOB:</label>
+              <input type="dob" name="dob" class="form-control" id="dob" ng-model="user.dob" placeholder="Enter dob" required>
+              <span class="error_message" ng-show="userform.dob.$touched && userform.dob.$error.required">DOB is required.</span>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button ng-if="edituser" type="submit" ng-click="updateUser(user)" class="btn btn-primary">Edit</button>
+           <button ng-if="createuser" type="submit" ng-click="createUser(user,userform)" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

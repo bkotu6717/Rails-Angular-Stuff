@@ -24,47 +24,38 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         requireBase: false
     });
 }]);
-app.factory('userService', ['$http', function ($http) {
-    dataFactory = {};
-    dataFactory.isDuplicateEmail = function (email) {
-       return $http({
-          method: 'GET',
-          url: '/users/email_uniqueness',
-          params: {email: email}
-        }).then(function successCallback(response) {
-           return response.data.data
-        }, function errorCallback(response) {
- 
-        });
-    };
-  return dataFactory;
+
+app.factory('dataService', ['$http', function ($http) {
+        dataFactory = {};
+        dataFactory.checkUniqueValue = function (value) {
+             return $http({
+                 method: 'GET',
+                 url: '/users/email_uniqueness',
+                 params: {email: value}
+              }).then(function successCallback(response) {
+                 return !(response.data.data)
+              });
+        };
+         return dataFactory;
 }]);
-
-app.directive('checkEmail', function(userService) {
-  return {
-    restrict: "A",
-    require: 'ngModel',
-    link: function(scope, ele, attrs, ctrl) {
-
-
-      ele.bind('blur', function() { 
-        scope.$apply(function() {
-          // Checking to see if the email has been already registered
-          console.log(userService.isDuplicateEmail(scope.user.email));
-          if (userService.isDuplicateEmail(scope.user.email)) {
-            console.log("true")
-            console.log(userService.isDuplicateEmail(scope.user.email));
-            ctrl.$setValidity('isDuplicatedEmail', false);
-           } else {
-            console.log("false")
-            console.log(userService.isDuplicateEmail(scope.user.email));
-             ctrl.$setValidity('isDuplicatedEmail', true);
-           }
-
-        });
-
-
-      })
+app.directive('wcUnique', ['dataService', function (dataService) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
+            element.bind('blur', function (e) {
+                if (!ngModel || !element.val()) return;
+                var keyProperty = scope.$eval(attrs.wcUnique);
+                var currentValue = element.val();
+                dataService.checkUniqueValue(currentValue)
+                    .then(function (unique) {
+                        if (currentValue == element.val()) { 
+                            ngModel.$setValidity('unique', unique);
+                        }
+                    }, function () {
+                        ngModel.$setValidity('unique', true);
+                    });
+            });
+        }
     }
-  }
-})
+}]);

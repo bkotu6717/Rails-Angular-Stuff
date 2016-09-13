@@ -1,59 +1,65 @@
-<div class="row">
-  <div class="col-md-7">
-  <h1>List of users</h1>
+<div ng-if="loader" class="overlay">
+  <img src="assets/loading.gif">
 </div>
-<div class="col-md-4">
-  <input type="text" class="form-control btn-down" placeholder="Search users" ng-model="search"/>
-
-</div>
-<div class="col-md-1">
-<button class="btn btn-primary pull-right btn-down" ng-click="initilizeUser()" data-toggle="modal" data-target="#myModal">Create</button>
-</div>
-</div>
-<div ng-if="success_message" class="alert alert-success">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Success!</strong> {{success_message}}.
-</div>
-<div ng-if="error_message" class="alert alert-danger">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Error!</strong> {{error_message}}
-</div>
-<div class="table-responsive">
-<table class="table">
-  <tr>
-    <th>Name 
-    <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-    <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-    </th>
-    <th>Email
-       <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-    <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-    </th> 
-    <th>DOB
-       <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-    <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-    </th>
-    <th>Actions</th>
-  </tr>
-  <tr ng-repeat="user in users | orderBy:OrderByField:reverseSort | filter:search">
-    <td>{{user.name}}</td>
-    <td>{{user.email}}</td> 
-    <td>{{user.dob}}</td>
-    <td><a href="" ng-click="editUser(user)" data-toggle="modal" data-target="#myModal">Edit</a> | <a href="" ng-click="deleteUser(user)">Delete</a> </td>
-  </tr>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>List of users</h1>
+    </div>
+    <div class="col-md-4">
+    <input type="text" class="form-control btn-down" placeholder="Search users" ng-model="search"/>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary pull-right btn-down" ng-click="initilizeUser()" data-toggle="modal" data-target="#myModal">Create</button>
+    </div>
+  </div>
+  <div ng-if="success_message" class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> {{success_message}}.
+  </div>
+  <div ng-if="error_message" class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> {{error_message}}
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Name 
+          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+        </th>
+        <th>Email
+         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+       </th> 
+       <th>DOB
+         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+       </th>
+       <th>Actions</th>
+     </tr>
+     <tr ng-repeat="user in users | orderBy:OrderByField:reverseSort | filter:search">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td> 
+      <td>{{user.dob}}</td>
+      <td><a href="" ng-click="editUser(user)" data-toggle="modal" data-target="#myModal">Edit</a> | <a href="" ng-click="deleteUser(user)">Delete</a> </td>
+    </tr>
+  </table>
 </div>
 
 <!-- https://github.com/brantwills/Angular-Paging -->
 <div paging
-  page="page_no" 
-  page-size="page_size" 
-  total="total"
-  paging-action="paginate(page)">
+page="page_no" 
+page-size="page_size" 
+total="total"
+paging-action="paginate(page)"
+show-prev-next="true"
+show-first-last="true">
+
 </div> 
 
- <div ng-include="'form.html'"></div>
-
+<div ng-include="'form.html'"></div>
+</div>
 <style type="text/css">
   *{
     margin: 0;
@@ -64,5 +70,23 @@
   }
   .error_message{
     color: red;
+  }
+  .overlay{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom:0;
+    left: 0;
+    background:rgba(0,0,0,.5);
+    text-align: center;
+    z-index:6;
+  }
+  .overlay img{
+    width:50px;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
   }
 </style>

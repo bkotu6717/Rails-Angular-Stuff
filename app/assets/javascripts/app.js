@@ -1,4 +1,4 @@
-app = angular.module('angularRailsStuff', ['ngRoute', 'templates', 'bw.paging']);
+app = angular.module('angularRailsStuff', ['ngRoute', 'templates', 'bw.paging', '720kb.datepicker']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider

@@ -17,6 +17,7 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require paging
+//= require angular-datepicker
 //= require_tree ../templates
 //= require app
 //= require_tree .

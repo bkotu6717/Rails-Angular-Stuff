@@ -27,7 +27,15 @@
             </div>
              <div class="form-group">
               <label for="dob">DOB:</label>
-              <input type="dob" name="dob" class="form-control" id="dob" ng-model="user.dob" placeholder="Enter dob" required>
+              <!-- https://github.com/720kb/angular-datepicker -->
+              <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Choose a date" ng-model="user.dob" placeholder="Enter dob" required/>
+                    <span class="input-group-addon" style="cursor: pointer">
+                    <i class="fa fa-lg fa-calendar"></i>
+                    </span>
+                </div>
+              </datepicker>
               <span class="error_message" ng-show="userform.dob.$touched && userform.dob.$error.required">DOB is required.</span>
 
             </div>

@@ -52,3 +52,4 @@ gem 'angular_rails_csrf'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rails_12factor', group: :production
 gem 'pg'
+ruby '2.2.0'

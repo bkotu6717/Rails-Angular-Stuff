@@ -18,6 +18,7 @@
 //= require angular-rails-templates
 //= require paging
 //= require angular-datepicker
+//= xeditable
 //= require_tree ../templates
 //= require app
 //= require_tree .

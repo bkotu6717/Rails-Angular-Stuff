@@ -54,7 +54,7 @@ app.controller('usersCtrl',['$scope', '$http', function($scope, $http) {
     	}
     }
 
-    $scope.updateUser = function(user) {
+    $scope.updateUser = function(user,id) {
     	$scope.success_message = '';
 			$scope.error_message = '';
     	$scope.edit_user = {};
@@ -63,23 +63,26 @@ app.controller('usersCtrl',['$scope', '$http', function($scope, $http) {
     	$scope.edit_user.dob = user.dob;
      	$http({
           method: 'PATCH',
-          url: '/users/'+user.id,
+          url: '/users/'+id,
           data : {user: $scope.edit_user}
         }).then(function successCallback(response) {
         	$scope.success_message = response.data.message;
-        	$('#myModal').modal('toggle');
-         }, function errorCallback(response) {
+          }, function errorCallback(response) {
           $scope.error_message = response.data.message;
-          $('#myModal').modal('toggle'); 
-        });
+         });
     }
-    $scope.deleteUser = function(user) {
-    	var user_id = user.id;
-    	if(confirm("Do you want to delete this user?") == true){
+    $scope.deleteUser = function(id) {
+     	if(confirm("Do you want to delete this user?") == true){
     		$scope.success_message = '';
 				$scope.error_message = '';
-    		$http.delete('/users/' + user_id)
+    		$http.delete('/users/' + id)
     			.then(function(response) {
+            var user;
+            for (var i = $scope.users.length - 1; i >= 0; i--) {
+              if($scope.users[i].id == id){
+                 user = $scope.users[i];
+              }
+            }
     				var index = $scope.users.indexOf(user)
     				$scope.users.splice(index, 1);
     			$scope.success_message = response.data.message;

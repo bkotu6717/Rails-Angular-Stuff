@@ -8,7 +8,7 @@
 
 User.delete_all
 users = []
-10.times do |i|
+1000.times do |i|
   users << {name: Faker::Name.name,
     email: Faker::Internet.email,
     dob: Faker::Date.between(20.years.ago, Date.today)

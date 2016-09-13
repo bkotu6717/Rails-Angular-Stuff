@@ -5,15 +5,24 @@ app.controller('usersCtrl',['$scope', '$http', function($scope, $http) {
 	$scope.createuser = false;
 	$scope.OrderByField = 'name';
 	$scope.sortOder = true;
-  $http.get('/users')
+  $http.get('/users?params[:page]=1')
     .then(function(response) {
-        $scope.users = response.data.data;
+      $scope.users = response.data.data;
+      $scope.page = 1;
+      $scope.page_size =10;
+      $scope.total = response.data.total;
     });
     $scope.editUser = function(user){
     	$scope.user = user;
     	$scope.edituser = true;
     	$scope.createuser = false;
     }
+   $scope.paginate = function(page) {
+   	 $http.get('/users?page='+page)
+    .then(function(response) {
+      $scope.users = response.data.data;
+    });
+   }
     $scope.initilizeUser = function(){
   		$scope.createuser = true;
   		$scope.edituser = false;

@@ -1,4 +1,4 @@
-app = angular.module('angularRailsStuff', ['ngRoute', 'templates']);
+app = angular.module('angularRailsStuff', ['ngRoute', 'templates', 'bw.paging']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider

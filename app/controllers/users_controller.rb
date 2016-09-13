@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 	before_filter :find_user, except: :index
 	before_filter :set_response_object
 	def index
-		@users = User.all
-		render json: { data: @users }
+		@users = User.paginate(:page => params[:page])
+		render json: { data: @users, total: User.count }
 	end
 
 	def create

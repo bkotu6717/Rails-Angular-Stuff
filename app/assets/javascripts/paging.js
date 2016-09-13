@@ -1,4 +1,4 @@
-/**
+/** 
  * @ngDoc directive
  * @name ng.directive:paging
  *

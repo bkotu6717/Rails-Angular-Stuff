@@ -1,0 +1,23 @@
+<a href="/">Go to users list </a>
+<div ng-if="loader" class="overlay">
+  <img src="loading.gif">
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Color</th>
+      <th>Company</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody tagged-infinite-scroll="getMore()" tagged-infinite-scroll-disabled="fetching || disabled"  tagged-infinite-scroll-distance="500">
+    <tr ng-repeat="item in items">
+      <td>{{item.name}}</td>
+      <td>{{item.color}}</td>
+      <td>{{item.department}}</td>
+      <td>${{item.price}}</td>
+    </tr>
+  </tbody>
+</table>

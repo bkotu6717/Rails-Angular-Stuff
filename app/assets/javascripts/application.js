@@ -17,6 +17,7 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require paging
+//= require taggedInfiniteScroll
 //= require angular-datepicker
 //= require xeditable
 //= require_tree ../templates

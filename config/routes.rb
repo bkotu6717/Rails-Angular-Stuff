@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-
   resources :users do 
     collection do
       get 'email_uniqueness'
     end
   end
+  resources :products
   root 'welcome#index'
   get '*path' => 'welcome#index'
 

@@ -6,13 +6,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.delete_all
-users = []
+# User.delete_all
+# users = []
+# 1000.times do |i|
+#   users << {name: Faker::Name.name,
+#     email: Faker::Internet.email,
+#     dob: Faker::Date.between(20.years.ago, Date.today)
+#     }
+# end
+
+# User.create(users)
+
+Product.delete_all
+products = []
 1000.times do |i|
-  users << {name: Faker::Name.name,
-    email: Faker::Internet.email,
-    dob: Faker::Date.between(20.years.ago, Date.today)
-    }
+	products << {
+		name: Faker::Company.name,
+		color: Faker::Commerce.color,
+		department: Faker::Commerce.department,
+		price: Faker::Commerce.price
+	}
 end
 
-User.create(users)
+Product.create(products)

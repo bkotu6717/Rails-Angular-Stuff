@@ -50,4 +50,5 @@ gem 'angular_rails_csrf'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rails_12factor', group: :production
 gem 'pg'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 ruby '2.2.0'

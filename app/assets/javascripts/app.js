@@ -1,5 +1,6 @@
 app = angular.module('angularRailsStuff', ['ngRoute', 'templates',
- 'bw.paging', '720kb.datepicker','xeditable', 'tagged.directives.infiniteScroll']);
+ 'bw.paging', '720kb.datepicker','xeditable', 'tagged.directives.infiniteScroll', 
+ 'ui.uploader']);
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
@@ -21,6 +22,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when("/product_list", {
         templateUrl : "product_list.html",
         controller: "productListCtrl"
+    })
+    .when("/actor_upload", {
+        templateUrl : "actor_upload.html",
+        controller: "actorCtrl"
+    })
+    .when("/actor_list", {
+        templateUrl : "actor_list.html",
+        controller: "actorCtrl"
     })
     .otherwise({
         redirectTo: 'public/404'

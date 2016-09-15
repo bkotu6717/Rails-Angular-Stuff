@@ -20,6 +20,7 @@
 //= require taggedInfiniteScroll
 //= require angular-datepicker
 //= require xeditable
-//= require_tree ../templates
+// require uploader
 //= require app
+//= require_tree ../templates
 //= require_tree .

@@ -6,11 +6,11 @@ app.run(function(editableOptions) {
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
     .when("/", {
-      templateUrl : "index.html",
-      controller: 'usersCtrl'
+      templateUrl : "index.html"
     })
-    .when("/red", {
-        templateUrl : "red.html"
+    .when("/users_list", {
+        templateUrl : "users_list.html",
+        controller: 'usersCtrl'
     })
     .when("/green", {
         templateUrl : "green.html"

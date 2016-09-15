@@ -1,88 +1,142 @@
-<div ng-if="loader" class="overlay">
-  <img src="loading.gif">
-</div>
-<a href="/product_list"> Go to Products</a>
-<div class="container">
-  <div class="row">
-    <div class="col-md-7">
-      <h1>List of users</h1>
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+      <div class="angular">
+        <img src="assets/angularjs.png" width="86px">
+      </div>
+      </div>
+       <div class="col-md-6">
+      <div class="logo text-center">
+        <h1>BLACKBOARD</h1>
+      </div>
+      </div>
+       <div class="col-md-3">
+       <div class="ruby pull-right">
+        <img src="assets/ruby.png" width="45px">
+      </div>
+      </div>
+    </div> 
+  </div>
+</header>
+<div class="container heading-tile">
+  <div class="row text-center rowdata">
+    <div class="col-md-3">
+      <div class="tile" style="background:#A62800">
+        <h2><a href="/users_list">X-Editable</a></h2>
+      </div>
     </div>
-    <div class="col-md-4">
-    <input type="text" class="form-control btn-down" placeholder="Search users" ng-model="search"/>
+    <div class="col-md-3">
+      <div class="tile" style="background:#0B7F34">
+        <h2><a href="/product_list">Infinite Scroll</a></h2>
+      </div>
     </div>
-    <div class="col-md-1">
-      <button class="btn btn-primary pull-right btn-down" ng-click="initilizeUser()" data-toggle="modal" data-target="#myModal">Create</button>
+    <div class="col-md-3">
+      <div class="tile" style="background:#65bcda">
+        <h2><a href="/">File Uploads</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#074F68">
+        <h2><a href="/">Forms</a></h2>
+      </div>
     </div>
   </div>
-  <div ng-if="success_message" class="alert alert-success">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> {{success_message}}.
+  <div class="row text-center rowdata">
+    <div class="col-md-3">
+      <div class="tile" style="background:#3B3E43">
+        <h2><a href="/users_list">X-Editable</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#67B636">
+        <h2><a href="/product_list">Infinite Scroll</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#2570A9">
+        <h2><a href="/">File Uploads</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#A62800">
+        <h2><a href="/">Forms</a></h2>
+      </div>
+    </div>
   </div>
-  <div ng-if="error_message" class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error!</strong> {{error_message}}
+  <div class="row text-center rowdata">
+    <div class="col-md-3">
+      <div class="tile" style="background:#0B7F34">
+        <h2><a href="/users_list">X-Editable</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#074F68">
+        <h2><a href="/product_list">Infinite Scroll</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#3B3E43">
+        <h2><a href="/">File Uploads</a></h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="tile" style="background:#67B636">
+        <h2><a href="/">Forms</a></h2>
+      </div>
+    </div>
   </div>
-  <div class="table-responsive">
-    <table class="table">
-      <tr>
-        <th>Name 
-          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-        </th>
-        <th>Email
-         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-       </th> 
-       <th>DOB
-         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
-         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
-       </th>
-       <th>Actions</th>
-     </tr>
-     <tr ng-repeat="user in users | orderBy:OrderByField:reverseSort | filter:search">
-       <td>
-          <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
-            {{ user.name || 'empty' }}
-          </span>
-        </td>
-        <td>
-          <span editable-text="user.email" e-name="email" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
-            {{ user.email || 'empty' }}
-          </span>
-        </td>
-        <td>
-          <span editable-text="user.dob" e-name="dob" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
-            {{ user.dob || 'empty' }}
-          </span>
-        </td>
-  
-      <td style="white-space: nowrap">
-         <form editable-form name="rowform" onbeforesave="updateUser($data,user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
-          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-            save
-          </button>
-          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-            cancel
-          </button>
-        </form>
-        <div class="buttons" ng-show="!rowform.$visible">
-          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button class="btn btn-danger" ng-click="deleteUser(user.id)">delete</button>
-        </div>  
-      </td>
-    </tr>
-  </table>
-</div>
-<!-- https://github.com/brantwills/Angular-Paging -->
-<div paging
-page="page_no" 
-page-size="page_size" 
-total="total"
-paging-action="paginate(page)"
-show-prev-next="true"
-show-first-last="true">
-
 </div> 
-
-<div ng-include="'form.html'"></div>
-</div>
+<footer>
+  <div class="text-center">
+    <p>Web Design Robin Thomas | Bhasker rao @copy 2016</p>
+  </div>
+</footer>
+<style type="text/css">
+  h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    padding: 0;
+  }
+  .tile{
+/*    background: #000;
+*/    border: 1px solid #ffffff;
+border-radius: 5px;
+box-shadow: 1px 1px 5px #333;
+}
+.tile h2{
+  padding:50px 0;
+}
+.tile h2 a{
+  color: #fff;
+}
+.heading-tile{
+  margin-top: 20px;
+}
+.header , footer{
+  background: #222222;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+footer p{
+  color: #fff;
+  padding: 20px;
+}
+.rowdata{
+  margin: 20px 0px;
+}
+.logo{
+  padding: 20px 0;
+}
+.logo h1{
+  color: #fff;
+  font-family: "museo-slab";
+}
+.ruby img{
+  margin-top: 13px;
+  margin-right: 17px;
+}
+</style>

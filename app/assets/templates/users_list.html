@@ -1,0 +1,87 @@
+<div ng-if="loader" class="overlay">
+  <img src="loading.gif">
+</div>
+ <div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>List of users</h1>
+    </div>
+    <div class="col-md-4">
+    <input type="text" class="form-control btn-down" placeholder="Search users" ng-model="search"/>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary pull-right btn-down" ng-click="initilizeUser()" data-toggle="modal" data-target="#myModal">Create</button>
+    </div>
+  </div>
+  <div ng-if="success_message" class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> {{success_message}}.
+  </div>
+  <div ng-if="error_message" class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> {{error_message}}
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Name 
+          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+          <span ng-click="orderByField='name'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+        </th>
+        <th>Email
+         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+         <span ng-click="orderByField='email'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+       </th> 
+       <th>DOB
+         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-show="reverseSort">(v)</span>
+         <span ng-click="orderByField='dob'; reverseSort = !reverseSort" ng-hide="reverseSort">(^)</span>
+       </th>
+       <th>Actions</th>
+     </tr>
+     <tr ng-repeat="user in users | orderBy:OrderByField:reverseSort | filter:search">
+       <td>
+          <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+            {{ user.name || 'empty' }}
+          </span>
+        </td>
+        <td>
+          <span editable-text="user.email" e-name="email" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+            {{ user.email || 'empty' }}
+          </span>
+        </td>
+        <td>
+          <span editable-text="user.dob" e-name="dob" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+            {{ user.dob || 'empty' }}
+          </span>
+        </td>
+  
+      <td style="white-space: nowrap">
+         <form editable-form name="rowform" onbeforesave="updateUser($data,user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="deleteUser(user.id)">delete</button>
+        </div>  
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- https://github.com/brantwills/Angular-Paging -->
+<div paging
+page="page_no" 
+page-size="page_size" 
+total="total"
+paging-action="paginate(page)"
+show-prev-next="true"
+show-first-last="true">
+
+</div> 
+
+<div ng-include="'form.html'"></div>
+</div>

@@ -9,9 +9,6 @@ namespace :heroku do
     puts `git push heroku master`
     puts 'Running database migrations ...'
     puts `heroku rake db:migrate`
-
-   
-
     puts 'All done!'
   end
 

@@ -25,10 +25,13 @@ app.controller('actorCtrl', function($scope, $log, uiUploader) {
 
   $scope.files = [];
   var element = document.getElementById('file1');
-  element.addEventListener('change', function(e) {
-    var files = e.target.files;
-    uiUploader.addFiles(files);
-    $scope.files = uiUploader.getFiles();
-    $scope.$apply();
-  });
+  if (element){
+    element.addEventListener('change', function(e) {
+      var files = e.target.files;
+      uiUploader.addFiles(files);
+      $scope.files = uiUploader.getFiles();
+      $scope.$apply();
+    });
+  }
+
 });

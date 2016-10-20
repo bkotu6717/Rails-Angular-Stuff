@@ -33,6 +33,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'sqlite3'
+
 end
 
 group :development do
@@ -48,7 +50,9 @@ gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'angular_rails_csrf'
 gem 'will_paginate', '~> 3.1.0'
-gem 'rails_12factor', group: :production
-gem 'pg'
+group :production do
+	gem 'rails_12factor', group: :production
+	gem 'pg'
+end
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 ruby '2.2.0'

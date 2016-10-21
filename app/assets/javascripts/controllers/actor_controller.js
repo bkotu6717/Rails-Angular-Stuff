@@ -36,7 +36,7 @@ app.controller('actorCtrl', function($scope, $log, uiUploader) {
 
   $scope.w = window.innerWidth;
   $scope.h = window.innerHeight-20;
-  $scope.uri = "http://lorempixel.com";
+  $scope.uri = "https://lorempixel.com";
   $scope.folders = [
     'animals',
     'business',

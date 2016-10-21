@@ -27,9 +27,17 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl : "actor_upload.html",
         controller: "actorCtrl"
     })
+    .when("/simple_file_upload", {
+        templateUrl : "simple_file_upload.html",
+        controller: "simpleFileUploadCtrl"
+    })
     .when("/actor_list", {
         templateUrl : "actor_list.html",
         controller: "actorCtrl"
+    })
+    .when("/test_form", {
+        templateUrl : "test_form.html",
+        controller: "formCtrl"
     })
     .otherwise({
         redirectTo: 'public/404'

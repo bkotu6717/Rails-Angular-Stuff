@@ -16,7 +16,7 @@ class ActorsController < ApplicationController
 	end
 
 	private
-	  def user_params
+	  def actor_params
     	params.permit!
   	end
 end

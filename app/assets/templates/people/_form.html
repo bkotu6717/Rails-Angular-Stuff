@@ -1,0 +1,81 @@
+<div class="form-group" ng-class="{'has-error' : submitted && personForm.first_name.$invalid}">
+    <label class="control-label col-md-3">First name <span class="required">* </span> </label>
+    <div class="col-md-4">
+        <input type="text" name="first_name" class="form-control" ng-model="person.first_name" required placeholder="first name"/>
+    </div>
+    <p ng-show=" submitted && personForm.first_name.$invalid" class="help-block">First name is required.</p>
+</div>
+<div class="form-group" ng-class="{'has-error' : submitted && personForm.last_name.$invalid}">
+    <label class="control-label col-md-3">Last name <span class="required">* </span> </label>
+    <div class="col-md-4">
+        <input type="text" name="last_name" class="form-control" ng-model="person.last_name" required placeholder="last name"/>
+    </div>
+    <p ng-show=" submitted && personForm.last_name.$invalid" class="help-block">Last name is required.</p>
+</div>
+<div class="form-group" ng-class="{'has-error' : submitted && personForm.email.$invalid}">
+    <label class="control-label col-md-3">Email <span class="required">* </span> </label>
+    <div class="col-md-4">
+        <input type="email" name="email" class="form-control" ng-model="person.email" required placeholder="test@example.com"/>
+    </div>
+    <p ng-show="submitted && personForm.email.$error.required" class="help-block">Email is required.</p>
+    <p ng-show="submitted && personForm.email.$error.email" class="help-block">Enter valid email</p>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">Phone </label>
+    <div class="col-md-4">
+        <input type="text" name="phone" class="form-control" ng-model="person.phone" placeholder="9876543210"/>
+    </div>
+    <p ng-show="submitted && personForm.phone.$invalid" class="help-block">Phone is required.</p>
+</div>
+
+<div ng-repeat="address in person.addresses">
+    <div ng-hide="address._destroy">
+        <div class="form-group">
+            <label class="control-label col-md-2">Address 1 </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.street1" placeholder="Address 1"/>
+            </div>
+            <label class="control-label col-md-2">Address 2 </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.street2" placeholder="Address 2"/>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="removeAddress($index, person)" class="btn btn-xs btn-danger">X</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">City </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.city" placeholder="Pune"/>
+            </div>
+            <label class="control-label col-md-2">State </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.state" placeholder="MH"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Country</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.country" placeholder="India"/>
+            </div>
+            <label class="control-label col-md-2">Zipcode </label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="address.zipcode" placeholder="12345"/>
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-12">
+        <a ng-click="addAddress()" class="btn btn-success btn-xs">+ Add address </a>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="pull-left">
+        <a class="btn btn-default" href="/people_list"> Back</a>
+        <button type="submit" class="btn btn-primary" ng-click="submitted=true">Submit</button>
+    </div>
+</div>
+

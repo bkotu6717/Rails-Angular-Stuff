@@ -1,9 +1,15 @@
 app = angular.module('angularRailsStuff', ['ngRoute', 'templates',
  'bw.paging', '720kb.datepicker','xeditable', 'tagged.directives.infiniteScroll', 
- 'ui.uploader']);
+ 'ui.uploader', 'ngResource']);
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
+
+app.config(['$resourceProvider', function($resourceProvider) {
+  // Don't strip trailing slashes from calculated URLs
+  $resourceProvider.defaults.stripTrailingSlashes = false;
+}]);
+
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
     .when("/", {
@@ -39,6 +45,19 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl : "test_form.html",
         controller: "formCtrl"
     })
+    .when('/people_list',{
+      templateUrl: "people/index.html",
+      controller: "peopleCtrl"
+    })
+    .when('/people_list/new', {
+      templateUrl: 'people/new.html',
+      controller: 'peopleCtrl'
+    })
+    .when('/people_list/:id/edit', {
+      templateUrl: 'people/edit.html',
+      controller: 'peopleCtrl'
+    })
+    
     .otherwise({
         redirectTo: 'public/404'
     });

@@ -1,0 +1,34 @@
+<div class="container">
+ <ul class="breadcrumb" style="margin-top:20px;width:150px;">
+    <li><a href="/">Home</a></li>
+     <li class="active">People List</li>
+</ul>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="/people_list/new">Create a user</a>
+            <h3 class="block">Users</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th></th>
+                </tr>
+                <tr ng-hide="people['people'].length" >
+                    <td colspan="5">No people found, Please create one.</td>
+                </tr>
+
+                <tr ng-show="people['people'].length" ng-repeat="person in people['people']">
+                    <td>{{person.first_name}}</td>
+                    <td>{{person.last_name}}</td>
+                    <td>{{person.email}}</td>
+                    <td>{{person.phone}}</td>
+                    <td>
+                        <a href="/people_list/{{person.id}}/edit">Edit</a> | <a href="" ng-click="deleteperson(person.id)">Remove</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

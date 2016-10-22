@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :products
   resources :actors
+  resources :people
   root 'welcome#index'
   get '*path' => 'welcome#index'
 
